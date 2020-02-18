@@ -1,0 +1,94 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>MR Valentines</title>
+ <!-- <script src="aframe-master.js"></script> -->
+  <script src ="https://aframe.io/releases/1.0.3/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-environment-component/dist/aframe-environment-component.min.js"></script>
+    <script src="https://rawgit.com/protyze/aframe-curve-component/master/dist/aframe-curve-component.min.js"></script>
+    <script src="https://rawgit.com/protyze/aframe-alongpath-component/master/dist/aframe-alongpath-component.min.js"></script>
+    <script src="https://rawgit.com/mayognaise/aframe-mouse-cursor-component/master/dist/aframe-mouse-cursor-component.min.js"></script> 
+</head>
+  <script>
+    
+AFRAME.registerComponent('cursor-listener', {
+  init: function () {
+    console.log("in register")
+         this.el.addEventListener('click', function (evt) {
+        console.log('I was clicked at: ', evt.detail.intersection.point);
+      });
+    }
+  });
+
+</script>
+<body> 
+  <a-scene>
+    <a-camera>
+      <a-text id="score-element" value="Welcome to RQI" position="-0.60 0.5 -0.8"></a-text>
+
+      <a-text id="select-langage" value="Select Language" position="-0.60 0.1 -0.5"></a-text>
+     
+     
+      <a-cursor></a-cursor>
+    </a-camera>
+   
+    <a-entity cursor-listener id="hindi-language" text= "value:Hindi ; width: 4" position="0 2 -0.8" 
+    animation__position="property: object3D.position.z; to: -0.6; dir: alternate; dur: 4000; loop: true"
+    animation__collect="property: position; to: 0 0 0; dur: 300; startEvents: collected"
+    animation__minimize="property: scale; to: 0 0 0; dur: 300; startEvents: collected"></a-entity>
+    
+    <a-entity  id="english-language" text= "value:English ; width: 4" position="2 2 -0.8"  onclick="displayScore()"
+    animation__position="property: object3D.position.z; to: -0.6; dir: alternate; dur: 4000; loop: true"
+    ></a-entity>
+    <a-entity environment="preset:japan"></a-entity>
+    <a-entity laser-controls camera look-controls mouse-cursor></a-entity>
+  </a-scene>
+  
+ <!-- <a-entity id="heart-model" gltf-model="playButton3D.gltf" position="0 1.5 -5"
+    animation__collect="property: position; to: 0 0 0; dur: 300; startEvents: collected"
+    animation__minimize="property: scale; to: 0 0 0; dur: 300; startEvents: collected"></a-entity>  -->
+
+  <script >
+    const sceneEl = document.querySelector("a-scene")
+const hindiEl = document.querySelector("#hindi-language")
+const cameraEl = document.querySelector('a-camera');
+const englishEl = document.querySelector("#english-language")
+function randomPosition() {
+  return {
+    x: (Math.random() - 0.5) * 20,
+    y: 1.5,
+    z: (Math.random() - 0.5) * 20
+  };
+}
+
+let score = 0;
+
+function displayScore() {
+console.log("just test")
+}
+
+  hindiEl.addEventListener('click', () => {
+    console.log("hindi")
+    //clone.dispatchEvent(new Event('collected'));
+    //displayScore();
+    //window.location.href = "http://localhost:8000/aframe_component.html";
+  })
+
+  englishEl.addEventListener('mousedown', () => {
+    console.log("english")
+    //clone.dispatchEvent(new Event('collected'));
+    //displayScore();
+    //window.location.href = "http://localhost:8000/aframe_component.html";
+  })
+
+//for(let i=0 ; i<2; i++){
+ 
+//}
+
+//displayScore()
+//selectLangauge()
+  </script>
+</body>
+</html>
